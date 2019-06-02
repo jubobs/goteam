@@ -9,7 +9,9 @@ type Worker interface {
 	Perform(t Task)
 }
 
-type Task int
+type Task struct {
+	Data string
+}
 
 type Team struct {
 	ch chan Worker
