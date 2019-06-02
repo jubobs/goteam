@@ -6,7 +6,7 @@ import (
 )
 
 type Worker interface {
-	Perform(t Task)
+	Perform(t Task) error
 }
 
 type Task struct {
@@ -42,7 +42,7 @@ func (team *Team) Accept(task Task) {
 	go func(Task) {
 		defer team.wg.Done()
 		worker := <-team.ch
-		worker.Perform(task)
+		worker.Perform(task) // error ignored for now
 		team.ch <- worker
 	}(task)
 }
